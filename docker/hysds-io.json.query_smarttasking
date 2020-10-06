@@ -21,10 +21,9 @@
       "enumerables": ["all","automated","manual_requests"]
     },
     {
-      "name": "lookback_hours",
+      "name": "query_since",
       "from": "submitter",
-      "type": "number",
-      "default": 1
+      "type": "datetime"
     },
     {
       "name": "starttime",
