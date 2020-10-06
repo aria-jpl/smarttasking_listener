@@ -1,0 +1,16 @@
+{
+    "ipath": "hysds::data/smarttasking-earthquake",
+    "match_pattern": "/(?P<id>event_earthquake_smart_tasking.+)$",
+    "alt_match_pattern": null,
+    "extractor": null,
+    "level": "l0",
+    "type": "event"
+},
+{
+    "ipath": "hysds::data/smarttasking-fire",
+    "match_pattern": "/(?P<id>event_fire_smart_tasking.+)$",
+    "alt_match_pattern": null,
+    "extractor": null,
+    "level": "l0",
+    "type": "event"
+}
