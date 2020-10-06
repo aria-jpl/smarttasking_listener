@@ -1,0 +1,1 @@
+20 * * * * /home/ops/verdi/bin/python /home/ops/verdi/ops/smarttasking_listener/listener_cron.py --tag=master --hours 2 > /home/ops/verdi/log/cron-smarttasking_listener.log 2>&1
