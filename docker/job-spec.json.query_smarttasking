@@ -1,0 +1,37 @@
+{
+  "command":"/home/ops/verdi/ops/smarttasking_listener/listener.py",
+  "disk_usage":"2GB",
+  "recommended-queues": ["factotum-job_worker-small", "aria-job_worker-small"],
+  "soft_time_limit": 1000,
+  "time_limit": 1800,
+  "params" : [
+    {
+      "name": "smarttasking_endpoint",
+      "destination": "context"
+    },
+    {
+      "name": "disaster_type",
+      "destination": "context"
+    },
+    {
+      "name": "disaster_source",
+      "destination": "context"
+    },
+    {
+      "name": "lookback_hours",
+      "destination": "context"
+    },
+    {
+      "name": "starttime",
+      "destination": "context"
+    },
+    {
+      "name": "endtime",
+      "destination": "context"
+    },
+    {
+      "name": "geojson_polygon",
+      "destination": "context"
+    }
+    ]
+}
