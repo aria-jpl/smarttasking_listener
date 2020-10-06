@@ -7,7 +7,7 @@ Builds a HySDS event product from the EONET event feed
 
 import os
 import json
-import datetime
+from datetime import datetime, timedelta
 import pytz
 
 VERSION = 'v1.0'
@@ -34,20 +34,43 @@ def build_id(event):
         event_id = event.get("event_id")
         category = event.get("disaster_type")
         st_prefix = "{}-{}".format(PRODUCT_PREFIX, category)
-        e_id = event_id[len(st_prefix)+1:]
-        uid = '{0}_{1}_{2}_{3}'.format(PRODUCT_PREFIX, category, source, e_id)
+        timestamp = event_id[len(st_prefix)+1:len(st_prefix)+20].replace("-", "").replace(":", "")
+        print(timestamp)
+        e_id = event_id[len(st_prefix)+26:].replace(",","")
+        uid = '{0}_{1}_{2}_{3}_{4}'.format(PRODUCT_PREFIX, category, source, timestamp, e_id)
     except Exception as err:
         raise Exception('failed in build_id on {} with {}'.format(event, err))
     return uid
 
 
+def get_delta(date, delta, flag="pre"):
+    date_time_obj = datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%fZ')
+    if flag == "pre":
+        return (date_time_obj - timedelta(days=delta)).strftime('%Y-%m-%dT%H:%M:%S')
+    if flag == "post":
+        return (date_time_obj + timedelta(days=delta)).strftime('%Y-%m-%dT%H:%M:%S')
+
+
 def build_dataset(event):
     """parse out the relevant dataset parameters and return as dict"""
     time = event.get("disaster_date")
+    type = event.get("disaster_type")
+    if type == "earthquake":
+        delta = 15
+    if type == "fire":
+        delta = 8
+
+    if event.get("obs_start_date") is None or event.get("obs_start_date") == "null":
+        start_time = get_delta(time, delta, flag="pre")
+        end_time = get_delta(time, delta, flag="post")
+    else:
+        start_time = event.get("obs_start_date")
+        end_time = event.get("obs_end_date")
+
     location = build_polygon_geojson(event)
     label = build_id(event)
     version = VERSION
-    return {'label': label, 'starttime': time, 'endtime': time, 'location': location, 'version': version}
+    return {'label': label, 'starttime': start_time, 'endtime': end_time, 'location': location, 'version': version}
 
 
 def build_metadata(event):
@@ -57,13 +80,6 @@ def build_metadata(event):
 def convert_epoch_time_to_utc(epoch_timestring):
     dt = datetime.datetime.utcfromtimestamp(epoch_timestring).replace(tzinfo=pytz.UTC)
     return dt.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3]  # use microseconds and convert to milli
-
-
-# def build_point_geojson(event):
-#     latitude = float(event['geometry']['coordinates'][1])
-#     longitude = float(event['geometry']['coordinates'][0])
-#     return {'type': 'point', 'coordinates': [longitude, latitude]}
-#
 
 
 def build_polygon_geojson(event):

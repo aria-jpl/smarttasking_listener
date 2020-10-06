@@ -1,0 +1,46 @@
+{
+    "label": "Query EONET Feed",
+    "submission_type": "individual",
+    "params" : [
+      {
+        "name": "smarttasking_endpoint",
+        "from": "submitter",
+      "type": "text",
+      "default": "https://er4e4wetd8.execute-api.us-west-2.amazonaws.com/notifications/smart_tasking"
+      },
+      {
+      "name": "disaster_type",
+      "from": "submitter",
+      "type": "enum",
+      "enumerables": ["all","earthquake","fire"]
+    },
+      {
+      "name": "disaster_source",
+      "from": "submitter",
+      "type": "enum",
+      "enumerables": ["all","automated","manual_requests"]
+    },
+    {
+      "name": "lookback_days",
+      "from": "submitter",
+      "type": "number",
+      "default": 1
+    },
+    {
+      "name": "starttime",
+      "from": "submitter",
+      "type": "datetime"
+    },
+    {
+      "name": "endtime",
+      "from": "submitter",
+      "type": "datetime"
+    },
+    {
+      "name": "geojson_polygon",
+      "from": "submitter",
+      "type": "text",
+      "default": "[[-180,-90],[-180,90],[180,90],[180,-90],[-180,-90]]"
+    }
+    ]
+}
