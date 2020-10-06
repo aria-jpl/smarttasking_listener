@@ -2,7 +2,7 @@ import json
 import build_event
 
 
-def main():
+def parse(response):
     # Replace with API call
     response = open("test_files/test_notif.json", "r").read()
     resp = json.loads(response)
@@ -23,4 +23,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parse()
