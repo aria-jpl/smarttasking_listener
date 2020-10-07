@@ -23,17 +23,23 @@
     {
       "name": "query_since",
       "from": "submitter",
-      "type": "datetime"
+      "placeholder": "YYYY-MM-DDThh:mm:ss",
+      "type": "text",
+      "optional": true
     },
     {
       "name": "starttime",
       "from": "submitter",
-      "type": "datetime"
+      "placeholder": "YYYY-MM-DDThh:mm:ss",
+      "type": "text",
+      "optional": true
     },
     {
       "name": "endtime",
       "from": "submitter",
-      "type": "datetime"
+      "placeholder": "YYYY-MM-DDThh:mm:ss",
+      "type": "text",
+      "optional": true
     },
     {
       "name": "geojson_polygon",
