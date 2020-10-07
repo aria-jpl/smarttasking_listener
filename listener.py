@@ -48,7 +48,7 @@ if __name__ == "__main__":
         params_list.append("disaster_since={}".format(start_time))
 
     if end_time is not None:
-        params_list.appent("disaster_till={}".format(end_time))
+        params_list.append("disaster_till={}".format(end_time))
 
     geojson_input = ctx.get("geojson_polygon")
     if geojson_input != "[[-180,-90],[-180,90],[180,90],[180,-90],[-180,-90]]":
