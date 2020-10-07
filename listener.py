@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import json
 from datetime import datetime, timedelta
 import response_parser
