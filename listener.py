@@ -16,7 +16,9 @@ def get_querysince(delta):
 
 def call_api(url):
     # Replace with API call
+    print("Making request to : {}".format(url))
     response = requests.get(url=url)
+    print("Response : {}".format(response))
     response_parser.parse(response)
 
 
@@ -41,14 +43,14 @@ if __name__ == "__main__":
     if query_since is not None:
         params_list.append("query_since={}".format(query_since))
 
-    start_time = ctx.get("starttime")
-    end_time = ctx.get("endtime")
-
-    if start_time is not None:
-        params_list.append("disaster_since={}".format(start_time))
-
-    if end_time is not None:
-        params_list.append("disaster_till={}".format(end_time))
+    # start_time = ctx.get("starttime")
+    # end_time = ctx.get("endtime")
+    #
+    # if start_time is not None:
+    #     params_list.append("disaster_since={}".format(start_time))
+    #
+    # if end_time is not None:
+    #     params_list.append("disaster_till={}".format(end_time))
 
     geojson_input = ctx.get("geojson_polygon")
     if geojson_input != "[[-180,-90],[-180,90],[180,90],[180,-90],[-180,-90]]":
