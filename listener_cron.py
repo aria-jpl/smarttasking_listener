@@ -24,7 +24,7 @@ def validate_temporal_input(starttime, hours_delta, days_delta):
         return "{}Z".format((datetime.utcnow()-timedelta(days=days_delta)).isoformat()), "daily"
     elif starttime is None and hours_delta is not None and days_delta is None:
         return "{}Z".format((datetime.utcnow() - timedelta(hours=hours_delta)).isoformat()), "hourly"
-    elif starttime is not None and hours_delta is None and days_delta is None:
+    elif starttime is not None and hours_delta is None and days_delta is None: # from starttime
         return starttime, None
     elif starttime is None and hours_delta is None and days_delta is None:
         raise Exception("None of the time parameters were specified. Must specify either start time, delta of hours"
@@ -118,13 +118,14 @@ if __name__ == "__main__":
     days_delta = args.days
     hours_delta = args.hours
     starttime = args.starttime
-    endtime = args.endtime
+    # endtime = args.endtime
     tag = args.tag
     polygon = args.polygon
 
     # construct job
-    query_since, job_name = validate_temporal_input(starttime, hours_delta, days_delta)
-
+    starttime, job_name = validate_temporal_input(starttime, hours_delta, days_delta)
+    query_since = starttime
+    endtime = "{}Z".format((datetime.utcnow().isoformat()))
     rtime = datetime.utcnow()
 
     if days_delta is not None:
@@ -153,6 +154,7 @@ if __name__ == "__main__":
 
     # submit job
     print("submitting job of type {}".format(job_spec))
+    print("submitting job {}".format(job_name))
     submit_mozart_job({}, rule,
         hysdsio={"id": "internal-temporary-wiring",
                  "params": params,
