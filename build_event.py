@@ -21,24 +21,24 @@ def build_hysds_product(event):
     metadata = build_metadata(event)
     build_product_dir(dataset, metadata)
     print('Publishing Event ID: {0}'.format(dataset['label']))
-    if event.get("event_id"):
-        print('    event:        {0}'.format(event['event_id']))
-    if event.get("request_id"):
-        print('    event:        {0}'.format(event['request_id']))   
+    if event.get("event_id".upper()):
+        print('    event:        {0}'.format(event['event_id'.upper()]))
+    if event.get("request_id".upper()):
+        print('    event:        {0}'.format(event['request_id'.upper()]))   
     print('    source:       {0}'.format("smart_tasking"))
     print('    event time:   {0}'.format(dataset['starttime']))
-    print('    location:     {0}'.format(event['location']['coordinates']))
+    print('    location:     {0}'.format(event['location'.upper()]['coordinates']))
     print('    version:      {0}'.format(dataset['version']))
 
 
 def build_id(event):
     try:
         source = "smart_tasking"
-        if event.get("event_id"):
-            event_id = event.get("event_id")
-        if event.get("request_id"):
-            event_id = event.get("request_id")
-        category = event.get("disaster_type")
+        if event.get("event_id".upper()):
+            event_id = event.get("event_id".upper())
+        if event.get("request_id".upper()):
+            event_id = event.get("request_id".upper())
+        category = event.get("disaster_type".upper())
         st_prefix = "{}-{}".format(PRODUCT_PREFIX, category)
         timestamp = event_id[len(st_prefix)+1:len(st_prefix)+20].replace("-", "").replace(":", "")
         print(timestamp)
@@ -59,19 +59,19 @@ def get_delta(date, delta, flag="pre"):
 
 def build_dataset(event):
     """parse out the relevant dataset parameters and return as dict"""
-    time = event.get("disaster_date")
-    type = event.get("disaster_type")
+    time = event.get("disaster_date".upper())
+    type = event.get("disaster_type".upper())
     if type == "earthquake":
         delta = 15
     if type == "fire":
         delta = 8
 
-    if event.get("obs_start_date") is None or event.get("obs_start_date") == "null":
+    if event.get("obs_start_date".upper()) is None or event.get("obs_start_date".upper()) == "null":
         start_time = get_delta(time, delta, flag="pre")
         end_time = get_delta(time, delta, flag="post")
     else:
-        start_time = event.get("obs_start_date")
-        end_time = event.get("obs_end_date")
+        start_time = event.get("obs_start_date".upper())
+        end_time = event.get("obs_end_date".upper())
 
     location = build_polygon_geojson(event)
     label = build_id(event)
@@ -89,7 +89,7 @@ def convert_epoch_time_to_utc(epoch_timestring):
 
 
 def build_polygon_geojson(event):
-    return event.get("location")
+    return event.get("location".upper())
 
 
 def build_product_dir(ds, met):
