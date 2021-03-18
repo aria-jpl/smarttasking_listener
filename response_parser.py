@@ -5,9 +5,11 @@ import build_event
 
 def parse(response):
     # Replace with API call
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    test_notif_path = "{}/test_files/test_notif.json".format(dir_path)
-    response = open(test_notif_path, "r").read()
+    ### test ###
+    # dir_path = os.path.dirname(os.path.realpath(__file__))
+    # test_notif_path = "{}/test_files/test_notif.json".format(dir_path)
+    # response = open(test_notif_path, "r").read()
+    ############
     resp = json.loads(response)
     if isinstance(resp, dict):
         if resp.get("message") == "Internal server error":

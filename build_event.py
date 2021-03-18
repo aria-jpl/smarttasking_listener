@@ -21,7 +21,10 @@ def build_hysds_product(event):
     metadata = build_metadata(event)
     build_product_dir(dataset, metadata)
     print('Publishing Event ID: {0}'.format(dataset['label']))
-    print('    event:        {0}'.format(event['event_id']))
+    if event.get("event_id"):
+        print('    event:        {0}'.format(event['event_id']))
+    if event.get("request_id"):
+        print('    event:        {0}'.format(event['request_id']))   
     print('    source:       {0}'.format("smart_tasking"))
     print('    event time:   {0}'.format(dataset['starttime']))
     print('    location:     {0}'.format(event['location']['coordinates']))
@@ -31,7 +34,10 @@ def build_hysds_product(event):
 def build_id(event):
     try:
         source = "smart_tasking"
-        event_id = event.get("event_id")
+        if event.get("event_id"):
+            event_id = event.get("event_id")
+        if event.get("request_id"):
+            event_id = event.get("request_id")
         category = event.get("disaster_type")
         st_prefix = "{}-{}".format(PRODUCT_PREFIX, category)
         timestamp = event_id[len(st_prefix)+1:len(st_prefix)+20].replace("-", "").replace(":", "")
