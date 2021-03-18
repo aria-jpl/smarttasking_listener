@@ -91,7 +91,7 @@ if __name__ == "__main__":
     '''
     # create parameter flags
     parser = argparse.ArgumentParser()
-    parser.add_argument("--endpoint", default="https://er4e4wetd8.execute-api.us-west-2.amazonaws.com/notifications/smart_tasking", help="smart tasking notifications endpoint")
+    parser.add_argument("--endpoint", default="https://er4e4wetd8.execute-api.us-west-2.amazonaws.com/smart_tasking/events", help="smart tasking notifications endpoint")
     parser.add_argument("--disaster_type", default="all", help="choose one: ['all','earthquake','fire']")
     parser.add_argument("--disaster_source", default="all", help="choose one: ['all','automated','manual_requests']")
     # parser.add_argument("--query_since", help="query time in ISO8601 format", nargs='?',
