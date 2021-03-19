@@ -25,21 +25,24 @@
       "from": "submitter",
       "placeholder": "YYYY-MM-DDThh:mm:ss",
       "type": "text",
-      "optional": true
+      "optional": true,
+      "lambda": "lambda x: dt.datetime.strptime(x, '%Y-%m-%dT%H:%H:%S')"
     },
     {
       "name": "starttime",
       "from": "submitter",
       "placeholder": "YYYY-MM-DDThh:mm:ss",
       "type": "text",
-      "optional": true
+      "optional": true,
+      "lambda": "lambda x: dt.datetime.strptime(x, '%Y-%m-%dT%H:%H:%S')"
     },
     {
       "name": "endtime",
       "from": "submitter",
       "placeholder": "YYYY-MM-DDThh:mm:ss",
       "type": "text",
-      "optional": true
+      "optional": true,
+      "lambda": "lambda x: dt.datetime.strptime(x, '%Y-%m-%dT%H:%H:%S')"
     },
     {
       "name": "geojson_polygon",
