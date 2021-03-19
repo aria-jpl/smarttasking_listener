@@ -26,7 +26,7 @@
       "placeholder": "YYYY-MM-DDThh:mm:ss",
       "type": "text",
       "optional": true,
-      "lambda": "lambda x: dt.datetime.strptime(x, '%Y-%m-%dT%H:%H:%S')"
+      "lambda": "lambda x: dt.datetime.strptime(x, '%Y-%m-%dT%H:%M:%S')"
     },
     {
       "name": "starttime",
@@ -34,7 +34,7 @@
       "placeholder": "YYYY-MM-DDThh:mm:ss",
       "type": "text",
       "optional": true,
-      "lambda": "lambda x: dt.datetime.strptime(x, '%Y-%m-%dT%H:%H:%S')"
+      "lambda": "lambda x: dt.datetime.strptime(x, '%Y-%m-%dT%H:%M:%S')"
     },
     {
       "name": "endtime",
@@ -42,7 +42,7 @@
       "placeholder": "YYYY-MM-DDThh:mm:ss",
       "type": "text",
       "optional": true,
-      "lambda": "lambda x: dt.datetime.strptime(x, '%Y-%m-%dT%H:%H:%S')"
+      "lambda": "lambda x: dt.datetime.strptime(x, '%Y-%m-%dT%H:%M:%S')"
     },
     {
       "name": "geojson_polygon",
