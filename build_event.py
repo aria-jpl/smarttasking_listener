@@ -63,7 +63,9 @@ def build_dataset(event):
     type = event.get("disaster_type".upper())
     if type == "earthquake":
         delta = 15
-    if type == "fire":
+    elif type == "fire":
+        delta = 8
+    else:
         delta = 8
 
     if event.get("obs_start_date".upper()) is None or event.get("obs_start_date".upper()) == "null":
